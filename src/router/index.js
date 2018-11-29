@@ -5,8 +5,6 @@ import {isURL} from '@/utils/validate'
 
 import http from '@/utils/httpRequest'
 
-
-import login from '../views/login'
 import main from '../views/main'
 
 import maintest from '../views/maintest'
@@ -59,7 +57,6 @@ const mainRoutes = {
     //Vue.cookie.delete('token')
     let token = Vue.cookie.get('token')
     console.log(token)
-    debugger
     if (!token || !/\S/.test(token)) {
       next({name: 'login'})
     }
@@ -75,33 +72,33 @@ const router = new Router({
 })
 
 
-// router.beforeEach((to, from, next) => {
-//   // 添加动态(菜单)路由
-//   // 1. 已经添加 or 全局路由, 直接访问
-//   // 2. 获取菜单列表, 添加并保存本地存储
-//   if (router.options.isAddDynamicMenuRoutes || fnCurrentRouteType(to) === 'global') {
-//     next()
-//   } else {
-//     // http({
-//     //   url: http.adornUrl('/sys/menu/nav'),
-//     //   method: 'get',
-//     //   params: http.adornParams()
-//     // }).then(({data}) => {
-//     //   console.log(data);
-//     //   if (data && data.code === 0) {
-//     //     fnAddDynamicMenuRoutes(data.menuList)
-//     //     router.options.isAddDynamicMenuRoutes = true
-//     //     sessionStorage.setItem('menuList', JSON.stringify(data.menuList || '[]'))
-//     //     sessionStorage.setItem('permissions', JSON.stringify(data.permissions || '[]'))
-//     //     next({...to, replace: true})
-//     //   } else {
-//     //     sessionStorage.setItem('menuList', '[]')
-//     //     sessionStorage.setItem('permissions', '[]')
-//     //     next()
-//     //   }
-//     // })
-//   }
-// })
+router.beforeEach((to, from, next) => {
+  // 添加动态(菜单)路由
+  // 1. 已经添加 or 全局路由, 直接访问
+  // 2. 获取菜单列表, 添加并保存本地存储
+  if (router.options.isAddDynamicMenuRoutes || fnCurrentRouteType(to) === 'global') {
+    next()
+  } else {
+    http({
+      url: http.adornUrl('/sys/menu/nav'),
+      method: 'get',
+      params: http.adornParams()
+    }).then(({data}) => {
+      console.log(data);
+      if (data && data.code === 0) {
+        fnAddDynamicMenuRoutes(data.menuList)
+        router.options.isAddDynamicMenuRoutes = true
+        sessionStorage.setItem('menuList', JSON.stringify(data.menuList || '[]'))
+        sessionStorage.setItem('permissions', JSON.stringify(data.permissions || '[]'))
+        next({...to, replace: true})
+      } else {
+        sessionStorage.setItem('menuList', '[]')
+        sessionStorage.setItem('permissions', '[]')
+        next()
+      }
+    })
+  }
+})
 
 /**
  * 判断当前路由类型, global: 全局路由, main: 主入口路由

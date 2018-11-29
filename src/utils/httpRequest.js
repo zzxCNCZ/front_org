@@ -8,7 +8,7 @@ const http = axios.create({
   timeout: 1000 * 30,
   withCredentials: true,
   headers: {
-    'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8'
+    'Content-Type': 'application/json; charset=utf-8'
   }
 })
 
@@ -26,7 +26,6 @@ http.interceptors.request.use(config => {
  * 响应拦截
  */
 http.interceptors.response.use(response => {
-  debugger
   if (response.data && response.data.code === 401) { // 401, token失效
     Vue.cookie.delete('token')
     /* router.push({ name: 'login' }, () => {
@@ -69,7 +68,7 @@ http.adornParams = (params = {}, openDefultParams = true) => {
  *  json: 'application/json; charset=utf-8'
  *  form: 'application/x-www-form-urlencoded; charset=utf-8'
  */
-http.adornData = (data = {}, openDefultdata, contentType) => {
+http.adornData = (data = {}, openDefultdata, contentType = 'json') => {
   var defaults = {
     't': new Date().getTime()
   }
