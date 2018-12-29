@@ -20,7 +20,15 @@ import httpRequest from '@/utils/httpRequest' // api: https://github.com/axios/a
 // import '@/mock' // 引入mock
 
 import { isAuth } from '@/utils'
+// 富文本编辑器
+import VueQuillEditor from 'vue-quill-editor'
+import 'quill/dist/quill.core.css'
+import 'quill/dist/quill.snow.css'
+import 'quill/dist/quill.bubble.css'
+// 打印插件
+import 'print-js'
 
+Vue.use(VueQuillEditor)
 // Vue.use(VueResource) //  用express，模拟本地数据
 Vue.config.productionTip = false
 

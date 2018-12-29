@@ -34,11 +34,29 @@ const mainRoutes = {
     { path: '/home', component: _import('common/home'), name: 'home', meta: { title: '首页' } },
     { path: '/demo-echarts', component: _import('demo/echarts'), name: 'demo-echarts', meta: { title: 'demo-echarts', isTab: true } },
     {
-      path: '/test1',
-      component: _import('modules/test'),
-      name: 'test1',
+      path: '/test',
+      component: _import('modules/testquill'),
+      name: 'test',
       meta: {
-        title: '测试1',
+        title: '测试quill',
+        isTab: true,
+      }
+    },
+    {
+      path: '/testprint',
+      component: _import('modules/testprint'),
+      name: 'testprint',
+      meta: {
+        title: '测试打印',
+        isTab: true,
+      }
+    },
+    {
+      path: '/testue',
+      component: _import('modules/testUEditor'),
+      name: 'testue',
+      meta: {
+        title: '测试UE',
         isTab: true,
       }
     },

@@ -10,6 +10,18 @@
           <icon name="shouye"  :scale="2" class="site-sidebar__menu-icon"></icon>
           <span slot="title">首页</span>
         </el-menu-item>
+        <el-menu-item index="test" @click="$router.push({ name: 'test' })">
+          <icon name="menu" :scale="2" class="site-sidebar__menu-icon"></icon>
+          <span slot="title">测试</span>
+        </el-menu-item>
+        <el-menu-item index="testprint" @click="$router.push({ name: 'testprint' })">
+          <icon name="menu" :scale="2" class="site-sidebar__menu-icon"></icon>
+          <span slot="title">测试打印</span>
+        </el-menu-item>
+        <el-menu-item index="testue" @click="$router.push({ name: 'testue' })">
+          <icon name="menu" :scale="2" class="site-sidebar__menu-icon"></icon>
+          <span slot="title">测试UEditor</span>
+        </el-menu-item>
        <!-- <el-menu-item index="demo-01" @click="$router.push({ name: 'demo-01' })">
           <icon name="mudedi" :scale="2" class="site-sidebar__menu-icon"></icon>
           <span slot="title">demo-01</span>
